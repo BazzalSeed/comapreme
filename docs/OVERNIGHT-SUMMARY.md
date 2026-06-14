@@ -1,4 +1,13 @@
-# comapreme — overnight build summary (2026-06-14)
+# comapreme — build summary (2026-06-14)
+
+> **Update (after first review):** Now **all 12 signs are fully built** — each with its own
+> bespoke animated vector creature (eye-tracking + blink), curated figures, traits, lore, and
+> personalized element. Input simplified to **year-only**. Landing shows a **floating creature
+> that shuffles through all 12 signs**. (Sections below predate this; the Dragon notes now
+> apply to every sign.)
+
+---
+
 
 Good morning ☀️ Here's what got built while you slept, and how to run it.
 
