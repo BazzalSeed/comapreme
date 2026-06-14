@@ -19,7 +19,7 @@ export function ShareButton({ url, text, label = "Share with a friend 🔗", cla
       typeof window !== "undefined" ? new URL(url, window.location.origin).toString() : url;
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
-        await navigator.share({ title: "comapreme", text, url: full });
+        await navigator.share({ title: "compareme", text, url: full });
         return;
       } catch {
         /* user cancelled or unsupported — fall through to copy */

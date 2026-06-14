@@ -30,7 +30,7 @@ export function ShareWithFriend({ slug, year, animal }: ShareWithFriendProps) {
       />
       <ShareButton
         url={`/compare?${params.toString()}`}
-        text={`I'm a ${animal} on comapreme 🐉 — are we compatible?`}
+        text={`I'm a ${animal} on compareme 🐉 — are we compatible?`}
         label="Compare with a friend 💞"
       />
     </div>

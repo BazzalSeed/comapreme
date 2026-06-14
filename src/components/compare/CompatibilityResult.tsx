@@ -124,7 +124,7 @@ export function CompatibilityResult({
       </div>
 
       <div className="mt-2 flex flex-col items-center gap-3">
-        <ShareButton url={shareUrl} text={`${aLabel} & ${bLabel}: ${compat.score}% — ${compat.title}! 💞 comapreme`} label="Share this result 🔗" />
+        <ShareButton url={shareUrl} text={`${aLabel} & ${bLabel}: ${compat.score}% — ${compat.title}! 💞 compareme`} label="Share this result 🔗" />
         <div className="flex flex-wrap justify-center gap-4 text-sm font-semibold text-[var(--vermilion-dk)]">
           <Link href={restartUrl} className="underline">Compare someone else →</Link>
           <Link href={ownSignUrl} className="underline">See your own sign →</Link>

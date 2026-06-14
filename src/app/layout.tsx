@@ -15,7 +15,7 @@ const body = Fredoka({
 });
 
 export const metadata: Metadata = {
-  title: "comapreme — your Chinese zodiac",
+  title: "compareme — your Chinese zodiac",
   description:
     "Enter your birth date, discover your Chinese zodiac sign, and meet the legends who share it.",
 };
