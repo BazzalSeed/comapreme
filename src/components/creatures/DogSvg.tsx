@@ -31,13 +31,13 @@ export function DogSvg({ className }: { className?: string }) {
 
       {/* HEAD */}
       <g data-role="head">
-        {/* floppy ears */}
-        <path d="M70 88 q-34 -22 -38 14 q-3 30 22 36 q14 4 22 -8 z"
+        {/* floppy ears — long, hanging down the sides (drawn behind the head) */}
+        <path d="M96 66 C 52 60, 28 96, 38 138 C 43 162, 62 172, 82 160 C 74 126, 76 90, 102 76 Z"
           fill="var(--gold)" stroke="var(--gold-edge)" strokeWidth="5" strokeLinejoin="round" />
-        <path d="M170 88 q34 -22 38 14 q3 30 -22 36 q-14 4 -22 -8 z"
+        <path d="M144 66 C 188 60, 212 96, 202 138 C 197 162, 178 172, 158 160 C 166 126, 164 90, 138 76 Z"
           fill="var(--gold)" stroke="var(--gold-edge)" strokeWidth="5" strokeLinejoin="round" />
-        <path d="M58 96 q-22 -10 -22 18 q0 20 14 24 z" fill="var(--vermilion)" opacity="0.25" />
-        <path d="M182 96 q22 -10 22 18 q0 20 -14 24 z" fill="var(--vermilion)" opacity="0.25" />
+        <path d="M92 82 C 60 82, 46 108, 52 138 C 55 156, 66 162, 78 156 C 72 128, 74 98, 92 86 Z" fill="var(--vermilion)" opacity="0.22" />
+        <path d="M148 82 C 180 82, 194 108, 188 138 C 185 156, 174 162, 162 156 C 168 128, 166 98, 148 86 Z" fill="var(--vermilion)" opacity="0.22" />
 
         {/* head */}
         <circle cx="120" cy="104" r="60" fill="var(--gold)" stroke="var(--gold-edge)" strokeWidth="5" />
