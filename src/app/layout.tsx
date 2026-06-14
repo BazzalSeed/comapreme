@@ -15,10 +15,26 @@ const body = Fredoka({
   weight: ["400", "500", "600", "700"],
 });
 
+const DESCRIPTION =
+  "Pick your birth year, discover your Chinese zodiac sign, meet the legends who share it — and see if you're compatible with your friends.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://compareme.club"),
   title: "compareme — your Chinese zodiac",
-  description:
-    "Enter your birth date, discover your Chinese zodiac sign, and meet the legends who share it.",
+  description: DESCRIPTION,
+  openGraph: {
+    title: "compareme — your Chinese zodiac",
+    description: DESCRIPTION,
+    url: "https://compareme.club",
+    siteName: "compareme",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "compareme — your Chinese zodiac",
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
