@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cinzel, Fredoka } from "next/font/google";
 import "./globals.css";
+import { SiteHeader } from "@/components/SiteHeader";
 
 const display = Cinzel({
   variable: "--font-display",
@@ -25,7 +26,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SiteHeader />
+        {children}
+      </body>
     </html>
   );
 }

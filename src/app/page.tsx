@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { YearInput } from "@/components/YearInput";
 import { ShuffleCreature } from "@/components/ShuffleCreature";
 
@@ -31,6 +32,10 @@ export default function Home() {
       <div className="w-[min(360px,90vw)] rounded-2xl border-[3px] border-[var(--gold-soft)] bg-[#fffdf6]/80 p-6 shadow-[0_6px_0_var(--gold-soft)] backdrop-blur">
         <YearInput />
       </div>
+
+      <Link href="/compare" className="text-sm font-semibold text-[var(--vermilion-dk)] underline">
+        or compare two signs →
+      </Link>
     </main>
   );
 }

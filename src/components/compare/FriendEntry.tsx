@@ -32,8 +32,13 @@ export function FriendEntry({ aSlug, aAnimal, aEmoji, aYear, aName, aElementAnim
 
   function go() {
     if (loading) return;
+    const cn = name.trim().slice(0, 24);
+    if (!cn) {
+      setError("Enter your name first 🐣");
+      return;
+    }
     if (!year) {
-      setError("Pick your birth year first 🐣");
+      setError("Pick your birth year 🐣");
       return;
     }
     setLoading(true);
@@ -43,8 +48,7 @@ export function FriendEntry({ aSlug, aAnimal, aEmoji, aYear, aName, aElementAnim
     if (aName) params.set("an", aName);
     params.set("b", z.slug);
     params.set("by", String(year));
-    const cn = name.trim().slice(0, 24);
-    if (cn) params.set("bn", cn);
+    params.set("bn", cn);
     router.push(`/compare?${params.toString()}`);
   }
 
@@ -66,9 +70,10 @@ export function FriendEntry({ aSlug, aAnimal, aEmoji, aYear, aName, aElementAnim
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
           maxLength={24}
-          placeholder="Your name (optional)"
+          placeholder="Your name"
+          aria-label="Your name"
+          onChange={(e) => { setName(e.target.value); setError(""); }}
           className="w-full rounded-xl border-[3px] border-[var(--ink)] bg-white px-4 py-2.5 text-center font-semibold text-[var(--ink)] shadow-[3px_3px_0_var(--ink)] outline-none focus:border-[var(--vermilion)]"
         />
         <div className="relative w-full">

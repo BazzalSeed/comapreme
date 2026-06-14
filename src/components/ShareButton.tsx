@@ -9,12 +9,14 @@ interface ShareButtonProps {
   text: string;
   label?: string;
   className?: string;
+  disabled?: boolean;
 }
 
-export function ShareButton({ url, text, label = "Share with a friend 🔗", className }: ShareButtonProps) {
+export function ShareButton({ url, text, label = "Share with a friend 🔗", className, disabled }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
 
   async function onShare() {
+    if (disabled) return;
     const full =
       typeof window !== "undefined" ? new URL(url, window.location.origin).toString() : url;
     if (typeof navigator !== "undefined" && navigator.share) {
@@ -36,7 +38,7 @@ export function ShareButton({ url, text, label = "Share with a friend 🔗", cla
 
   return (
     <span className="relative inline-block">
-      <button type="button" onClick={onShare} className={className ?? "btn-primary"}>
+      <button type="button" onClick={onShare} disabled={disabled} className={className ?? "btn-primary"}>
         {label}
       </button>
       {copied && (

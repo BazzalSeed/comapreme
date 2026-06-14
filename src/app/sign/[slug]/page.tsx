@@ -66,6 +66,14 @@ export default async function SignPage({ params, searchParams }: PageProps) {
         emblem={isDragon ? "龍" : sign.emoji}
       />
 
+      {/* prominent share — right under the hero, no scrolling */}
+      <section className="mx-auto flex w-full max-w-2xl flex-col items-center gap-3 px-4 pb-6 text-center">
+        <h2 className="font-display text-2xl text-[var(--vermilion-dk)]">
+          Are you compatible with your friends?
+        </h2>
+        <ShareWithFriend slug={slug} year={personal?.year} animal={content.animal} />
+      </section>
+
       <FigureGallery figures={content.figures} animal={content.animal} />
       <TraitBars traits={content.traits} animal={content.animal} />
       <LorePanel lore={content.lore} animal={content.animal} emoji={sign.emoji} />
@@ -76,16 +84,9 @@ export default async function SignPage({ params, searchParams }: PageProps) {
         elementAnimal={personal?.elementAnimal}
       />
 
-      <footer className="mx-auto flex w-full max-w-2xl flex-col items-center gap-6 px-4 pb-16 text-center">
-        <div className="flex flex-col items-center gap-3">
-          <h2 className="font-display text-2xl text-[var(--vermilion-dk)]">
-            Are you compatible with your friends?
-          </h2>
-          <ShareWithFriend slug={slug} year={personal?.year} animal={content.animal} />
-        </div>
-        <Link href="/" className="text-sm font-semibold text-[var(--vermilion-dk)] underline">
-          Check another sign →
-        </Link>
+      <footer className="mx-auto flex w-full max-w-2xl flex-wrap items-center justify-center gap-4 px-4 pb-16 text-center text-sm font-semibold text-[var(--vermilion-dk)]">
+        <Link href="/compare" className="underline">Compare two signs →</Link>
+        <Link href="/" className="underline">Check another sign →</Link>
       </footer>
     </main>
   );
