@@ -1,4 +1,4 @@
-# comapreme — Share + Compatibility Compare — Design Spec
+# compareme — Share + Compatibility Compare — Design Spec
 
 **Date:** 2026-06-14
 **Branch:** `feat/share-compare`

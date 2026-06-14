@@ -1,4 +1,4 @@
-# comapreme — Phase 1 (Dragon vertical slice) — Design Spec
+# compareme — Phase 1 (Dragon vertical slice) — Design Spec
 
 **Date:** 2026-06-14
 **Status:** Approved (brainstorm complete) — autonomous overnight build authorized
@@ -76,7 +76,7 @@ src/
 ## 6. Screens
 
 ### Landing (`/`)
-- comapreme logo + tagline ("Discover your Chinese zodiac — and the legends who share your
+- compareme logo + tagline ("Discover your Chinese zodiac — and the legends who share your
   sign."), a friendly DOB input + "Reveal my sign 🐉" button, a peeking idle dragon.
 - Validation: empty / invalid / future dates → friendly inline message.
 - Submit → compute sign → route to `/sign/[slug]`.

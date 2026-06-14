@@ -1,6 +1,6 @@
-# comapreme — Phase 1 Implementation Plan (overnight build)
+# compareme — Phase 1 Implementation Plan (overnight build)
 
-**Spec:** [`../specs/2026-06-14-comapreme-dragon-design.md`](../specs/2026-06-14-comapreme-dragon-design.md)
+**Spec:** [`../specs/2026-06-14-compareme-dragon-design.md`](../specs/2026-06-14-compareme-dragon-design.md)
 **Mode:** autonomous, sequential, local-only. Commit after each milestone.
 
 ## Milestones

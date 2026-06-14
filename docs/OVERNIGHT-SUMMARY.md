@@ -1,4 +1,4 @@
-# comapreme — build summary (2026-06-14)
+# compareme — build summary (2026-06-14)
 
 > **Update (after first review):** Now **all 12 signs are fully built** — each with its own
 > bespoke animated vector creature (eye-tracking + blink), curated figures, traits, lore, and
@@ -26,7 +26,7 @@ npm run build    # clean production build
 
 ## What works (verified in a real browser)
 
-- **Landing** (`/`): Cinzel gold "comapreme" title, a peeking serpentine dragon, the DOB
+- **Landing** (`/`): Cinzel gold "compareme" title, a peeking serpentine dragon, the DOB
   input with friendly validation (empty / future / pre-1900). → `docs/screenshots/landing.png`
 - **Zodiac accuracy**: `getZodiac` corrects for the **Chinese New Year boundary** (someone
   born early-Feb gets the *right* animal, not a naive year guess) and derives the element
