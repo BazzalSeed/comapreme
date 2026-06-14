@@ -61,6 +61,7 @@ export default async function SignPage({ params, searchParams }: PageProps) {
         excited={content.excited}
         character={character}
         puff={isDragon ? "🔥" : sign.emoji}
+        emblem={isDragon ? "龍" : sign.emoji}
       />
 
       <FigureGallery figures={content.figures} animal={content.animal} />

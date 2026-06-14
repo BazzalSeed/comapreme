@@ -19,9 +19,11 @@ interface SignHeroProps {
   character: React.ReactNode;
   /** Emoji that puffs out on click. */
   puff: string;
+  /** Banner end-cap emblem. */
+  emblem?: string;
 }
 
-export function SignHero({ bannerSub, bannerTitle, chips, jokes, excited, character, puff }: SignHeroProps) {
+export function SignHero({ bannerSub, bannerTitle, chips, jokes, excited, character, puff, emblem }: SignHeroProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const holderRef = useRef<HTMLDivElement>(null);
   const bubbleRef = useRef<HTMLDivElement>(null);
@@ -111,7 +113,7 @@ export function SignHero({ bannerSub, bannerTitle, chips, jokes, excited, charac
 
   return (
     <div ref={heroRef} className="relative flex flex-col items-center gap-5 px-4 pt-10 pb-6 select-none cursor-pointer">
-      <GameBanner sub={bannerSub} title={bannerTitle} />
+      <GameBanner sub={bannerSub} title={bannerTitle} emblem={emblem} />
 
       <div className="flex flex-wrap justify-center gap-2">
         {chips.map((c) => (
