@@ -17,6 +17,10 @@ export function Reveal({ children, delay = 0, className }: RevealProps) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      const t = window.setTimeout(() => setShown(true), 0);
+      return () => window.clearTimeout(t);
+    }
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -26,10 +30,15 @@ export function Reveal({ children, delay = 0, className }: RevealProps) {
           }
         }
       },
-      { threshold: 0.15 },
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" },
     );
     io.observe(el);
-    return () => io.disconnect();
+    // safety net: never let content stay hidden if the observer misfires
+    const fallback = window.setTimeout(() => setShown(true), 2500);
+    return () => {
+      io.disconnect();
+      window.clearTimeout(fallback);
+    };
   }, []);
 
   return (
