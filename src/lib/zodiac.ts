@@ -77,3 +77,21 @@ export function getZodiac(input: Date | string): ZodiacResult {
     approximate: cny.approximate,
   };
 }
+
+/**
+ * Compute the Chinese zodiac directly from a birth YEAR (no Chinese New Year
+ * boundary correction — the year IS the zodiac year). Used by the year-only input.
+ */
+export function getZodiacByYear(year: number): ZodiacResult {
+  const animal = ANIMALS[mod(year - 4, 12)];
+  const element = ELEMENTS[Math.floor(mod(year - 4, 10) / 2)];
+  return {
+    animal,
+    slug: animal.toLowerCase(),
+    year,
+    gregorianYear: year,
+    element,
+    elementAnimal: `${element} ${animal}`,
+    approximate: false,
+  };
+}

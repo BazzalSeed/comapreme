@@ -72,12 +72,4 @@ export const dragon: SignContent = {
     { title: "Master of Water", emoji: "🌊",
       body: "Dragons command rivers, seas, and storms. Want rain for the harvest? You ask very, very nicely." },
   ],
-
-  elements: [
-    { element: "Wood", years: [1964, 2024], blurb: "Warm-hearted, collaborative, a born visionary." },
-    { element: "Fire", years: [1976, 2036], blurb: "Intense, competitive, impossible to ignore." },
-    { element: "Earth", years: [1928, 1988], blurb: "Grounded, fair, and quietly powerful." },
-    { element: "Metal", years: [1940, 2000], blurb: "Bold, decisive, and frankly unstoppable." },
-    { element: "Water", years: [1952, 2012], blurb: "Calm, clever, and effortlessly diplomatic." },
-  ],
 };

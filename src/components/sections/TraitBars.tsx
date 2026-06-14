@@ -11,12 +11,12 @@ function Bar({ value }: { value: number }) {
   );
 }
 
-export function TraitBars({ traits }: { traits: Trait[] }) {
+export function TraitBars({ traits, animal }: { traits: Trait[]; animal: string }) {
   return (
     <section className="mx-auto w-full max-w-2xl px-4 py-12">
       <Reveal>
         <h2 className="font-display text-center text-3xl text-[var(--vermilion-dk)] mb-8">
-          Dragon traits
+          {animal} traits
         </h2>
       </Reveal>
       <div className="flex flex-col gap-4">

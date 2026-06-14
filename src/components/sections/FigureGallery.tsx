@@ -1,7 +1,7 @@
 import type { Figure } from "@/data/types";
 import { Reveal } from "@/components/Reveal";
 
-export function FigureGallery({ figures }: { figures: Figure[] }) {
+export function FigureGallery({ figures, animal }: { figures: Figure[]; animal: string }) {
   return (
     <section className="mx-auto w-full max-w-5xl px-4 py-12">
       <Reveal>
@@ -9,7 +9,7 @@ export function FigureGallery({ figures }: { figures: Figure[] }) {
           Icons born in your year
         </h2>
         <p className="text-center text-[var(--gold-edge)] mb-8 font-medium">
-          Legends who share the Dragon ✦
+          Legends who share the {animal} ✦
         </p>
       </Reveal>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">

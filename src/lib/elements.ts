@@ -15,3 +15,12 @@ export const ELEMENT_COLOR: Record<Element, string> = {
   Metal: "var(--el-metal)",
   Water: "var(--el-water)",
 };
+
+/** Shared element personality blurbs (apply across all signs). */
+export const ELEMENT_BLURBS: Record<Element, string> = {
+  Wood: "Warm-hearted, collaborative, and full of fresh ideas.",
+  Fire: "Intense, passionate, and impossible to ignore.",
+  Earth: "Grounded, fair, and quietly powerful.",
+  Metal: "Bold, decisive, and frankly unstoppable.",
+  Water: "Calm, clever, and effortlessly diplomatic.",
+};

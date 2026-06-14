@@ -61,5 +61,4 @@ export interface SignContent {
   figures: Figure[];
   traits: Trait[];
   lore: LoreBite[];
-  elements: ElementInfo[];
 }

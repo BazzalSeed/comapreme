@@ -1,5 +1,15 @@
 import { describe, it, expect } from "vitest";
-import { getZodiac } from "./zodiac";
+import { getZodiac, getZodiacByYear } from "./zodiac";
+
+describe("getZodiacByYear", () => {
+  it("maps years to animal + element without boundary correction", () => {
+    expect(getZodiacByYear(2024)).toMatchObject({ animal: "Dragon", element: "Wood", slug: "dragon" });
+    expect(getZodiacByYear(2012)).toMatchObject({ animal: "Dragon", element: "Water" });
+    expect(getZodiacByYear(2020)).toMatchObject({ animal: "Rat", element: "Metal" });
+    expect(getZodiacByYear(2022)).toMatchObject({ animal: "Tiger", element: "Water" });
+    expect(getZodiacByYear(2025).elementAnimal).toBe("Wood Snake");
+  });
+});
 
 describe("getZodiac — animal by year (mid-year, no boundary ambiguity)", () => {
   it("identifies Dragon years", () => {

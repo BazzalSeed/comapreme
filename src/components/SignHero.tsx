@@ -3,22 +3,25 @@
 import { useEffect, useRef, useState } from "react";
 import { GameBanner } from "@/components/GameBanner";
 import { StatChip } from "@/components/StatChip";
-import { DragonSvg } from "./DragonSvg";
 
 export interface Chip {
   label: string;
   color?: string;
 }
 
-interface DragonHeroProps {
+interface SignHeroProps {
   bannerSub: string;
   bannerTitle: string;
   chips: Chip[];
   jokes: string[];
   excited: string[];
+  /** The hero character (bespoke SVG for Dragon, big emoji otherwise). */
+  character: React.ReactNode;
+  /** Emoji that puffs out on click. */
+  puff: string;
 }
 
-export function DragonHero({ bannerSub, bannerTitle, chips, jokes, excited }: DragonHeroProps) {
+export function SignHero({ bannerSub, bannerTitle, chips, jokes, excited, character, puff }: SignHeroProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const holderRef = useRef<HTMLDivElement>(null);
   const bubbleRef = useRef<HTMLDivElement>(null);
@@ -32,6 +35,7 @@ export function DragonHero({ bannerSub, bannerTitle, chips, jokes, excited }: Dr
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // present only for the bespoke dragon SVG; null-safe for emoji characters
     const pupils = [
       holder.querySelector<SVGGraphicsElement>("[data-role=pupil-left]"),
       holder.querySelector<SVGGraphicsElement>("[data-role=pupil-right]"),
@@ -52,7 +56,6 @@ export function DragonHero({ bannerSub, bannerTitle, chips, jokes, excited }: Dr
       say(jokes[jokeIdx.current]);
     }
 
-    // eye-follow + head tilt
     const onMove = (e: PointerEvent) => {
       if (reduce) return;
       for (const p of pupils) {
@@ -77,16 +80,16 @@ export function DragonHero({ bannerSub, bannerTitle, chips, jokes, excited }: Dr
     const onClick = (e: MouseEvent) => {
       if (!reduce) {
         holder.classList.remove("jump");
-        void holder.offsetWidth; // reflow to restart animation
+        void holder.offsetWidth;
         holder.classList.add("jump");
-        const puff = document.createElement("div");
-        puff.className = "fire-puff";
-        puff.textContent = "🔥";
+        const el = document.createElement("div");
+        el.className = "fire-puff";
+        el.textContent = puff;
         const r = hero.getBoundingClientRect();
-        puff.style.left = `${e.clientX - r.left - 16}px`;
-        puff.style.top = `${e.clientY - r.top - 16}px`;
-        hero.appendChild(puff);
-        window.setTimeout(() => puff.remove(), 1000);
+        el.style.left = `${e.clientX - r.left - 16}px`;
+        el.style.top = `${e.clientY - r.top - 16}px`;
+        hero.appendChild(el);
+        window.setTimeout(() => el.remove(), 1000);
       }
       nextJoke();
     };
@@ -104,20 +107,15 @@ export function DragonHero({ bannerSub, bannerTitle, chips, jokes, excited }: Dr
       hero.removeEventListener("click", onClick);
       window.clearInterval(interval);
     };
-  }, [jokes, excited]);
+  }, [jokes, excited, puff]);
 
   return (
-    <div
-      ref={heroRef}
-      className="relative flex flex-col items-center gap-5 px-4 pt-10 pb-6 select-none cursor-pointer"
-    >
+    <div ref={heroRef} className="relative flex flex-col items-center gap-5 px-4 pt-10 pb-6 select-none cursor-pointer">
       <GameBanner sub={bannerSub} title={bannerTitle} />
 
       <div className="flex flex-wrap justify-center gap-2">
         {chips.map((c) => (
-          <StatChip key={c.label} color={c.color}>
-            {c.label}
-          </StatChip>
+          <StatChip key={c.label} color={c.color}>{c.label}</StatChip>
         ))}
       </div>
 
@@ -125,13 +123,11 @@ export function DragonHero({ bannerSub, bannerTitle, chips, jokes, excited }: Dr
         {bubble}
       </div>
 
-      <div ref={holderRef} className="d-holder" style={{ width: "min(560px, 86vw)" }}>
-        <DragonSvg className="d-float" />
+      <div ref={holderRef} className="d-holder flex items-center justify-center" style={{ width: "min(560px, 86vw)" }}>
+        {character}
       </div>
 
-      <p className="text-[0.6rem] tracking-[0.18em] uppercase text-[#bba87f]">
-        psst — hover me, click me 🐲
-      </p>
+      <p className="text-[0.6rem] tracking-[0.18em] uppercase text-[#bba87f]">psst — hover me, click me ✨</p>
     </div>
   );
 }

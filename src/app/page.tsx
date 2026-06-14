@@ -1,4 +1,4 @@
-import { DobInput } from "@/components/DobInput";
+import { YearInput } from "@/components/YearInput";
 import { DragonSvg } from "@/components/dragon/DragonSvg";
 
 export default function Home() {
@@ -21,7 +21,7 @@ export default function Home() {
           comapreme
         </h1>
         <p className="mt-3 max-w-md text-lg font-medium text-[#5a4a2a]">
-          Discover your Chinese zodiac — and meet the legends who share your sign.
+          Pick your birth year, find your Chinese zodiac — and meet the legends who share your sign.
         </p>
       </div>
 
@@ -31,7 +31,7 @@ export default function Home() {
       </div>
 
       <div className="w-[min(360px,90vw)] rounded-2xl border-[3px] border-[var(--gold-soft)] bg-[#fffdf6]/80 p-6 shadow-[0_6px_0_var(--gold-soft)] backdrop-blur">
-        <DobInput />
+        <YearInput />
       </div>
 
       <p className="text-xs font-medium tracking-wide text-[var(--gold-edge)]">
