@@ -219,7 +219,7 @@ body {
 .d-whisk { animation: d-sway 3s ease-in-out infinite; transform-origin: 64px 144px; }
 .d-whisk2 { animation: d-sway 3.6s ease-in-out infinite reverse; transform-origin: 66px 158px; }
 @keyframes d-sway { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(6deg); } }
-.d-eyes { animation: d-blink 4.5s infinite; transform-origin: 120px 123px; }
+.d-eyes { animation: d-blink 4.5s infinite; transform-box: fill-box; transform-origin: center; }
 @keyframes d-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
 .d-pearl { animation: d-pulse 2.4s ease-in-out infinite; transform-origin: 52px 120px; }
 @keyframes d-pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.15); opacity: 0.8; } }
@@ -229,13 +229,15 @@ body {
 @keyframes d-jump { 0% { transform: translateY(0); } 35% { transform: translateY(-46px) scale(1.05, 0.95); } 100% { transform: translateY(0); } }
 .fire-puff { position: absolute; font-size: 2rem; pointer-events: none; z-index: 30; animation: fire-puff 1s ease-out forwards; }
 @keyframes fire-puff { 0% { opacity: 1; transform: translateY(0) scale(0.6); } 100% { opacity: 0; transform: translateY(-90px) scale(1.6); } }
+.creature-pop { animation: creature-pop 0.45s ease both; }
+@keyframes creature-pop { 0% { opacity: 0; transform: scale(0.7) translateY(8px); } 60% { transform: scale(1.05); } 100% { opacity: 1; transform: none; } }
 
 /* ============================================================
    Reduced motion — calm everything down
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .d-float, .d-whisk, .d-whisk2, .d-eyes, .d-pearl, .d-holder.jump, .fire-puff {
+  .d-float, .d-whisk, .d-whisk2, .d-eyes, .d-pearl, .d-holder.jump, .fire-puff, .creature-pop {
     animation: none !important;
   }
   .d-holder.excited { transform: none; }

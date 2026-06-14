@@ -69,7 +69,9 @@ export function SignHero({ bannerSub, bannerTitle, chips, jokes, excited, charac
       if (head) {
         const r = head.getBoundingClientRect();
         const tilt = Math.max(-9, Math.min(9, (e.clientX - (r.left + r.width / 2)) / 26));
-        head.setAttribute("transform", `rotate(${tilt} 118 138)`);
+        // rotate around the head's own bbox center so any creature works
+        const bb = head.getBBox();
+        head.setAttribute("transform", `rotate(${tilt} ${bb.x + bb.width / 2} ${bb.y + bb.height / 2})`);
       }
     };
 

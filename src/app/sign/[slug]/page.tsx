@@ -5,7 +5,7 @@ import { getSignContent } from "@/data/content";
 import { getZodiacByYear } from "@/lib/zodiac";
 import { ELEMENT_EMOJI, ELEMENT_COLOR } from "@/lib/elements";
 import { SignHero, type Chip } from "@/components/SignHero";
-import { DragonSvg } from "@/components/dragon/DragonSvg";
+import { CREATURES } from "@/components/creatures";
 import { FigureGallery } from "@/components/sections/FigureGallery";
 import { TraitBars } from "@/components/sections/TraitBars";
 import { LorePanel } from "@/components/sections/LorePanel";
@@ -35,8 +35,9 @@ export default async function SignPage({ params, searchParams }: PageProps) {
   const personal = z && z.slug === slug ? z : null;
 
   const isDragon = slug === "dragon";
-  const character = isDragon ? (
-    <DragonSvg className="d-float" />
+  const Creature = CREATURES[slug];
+  const character = Creature ? (
+    <Creature className="d-float" />
   ) : (
     <span className="d-float" style={{ fontSize: "clamp(5rem, 24vw, 12rem)", lineHeight: 1 }} aria-hidden>
       {sign.emoji}

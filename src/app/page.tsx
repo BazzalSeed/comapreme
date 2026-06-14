@@ -1,5 +1,5 @@
 import { YearInput } from "@/components/YearInput";
-import { DragonSvg } from "@/components/dragon/DragonSvg";
+import { ShuffleCreature } from "@/components/ShuffleCreature";
 
 export default function Home() {
   return (
@@ -25,18 +25,12 @@ export default function Home() {
         </p>
       </div>
 
-      {/* peeking dragon */}
-      <div style={{ width: "min(280px, 70vw)" }} className="d-float -mb-2">
-        <DragonSvg />
-      </div>
+      {/* floating creature, shuffling through all 12 signs */}
+      <ShuffleCreature />
 
       <div className="w-[min(360px,90vw)] rounded-2xl border-[3px] border-[var(--gold-soft)] bg-[#fffdf6]/80 p-6 shadow-[0_6px_0_var(--gold-soft)] backdrop-blur">
         <YearInput />
       </div>
-
-      <p className="text-xs font-medium tracking-wide text-[var(--gold-edge)]">
-        12 signs · 1 very dramatic dragon (so far)
-      </p>
     </main>
   );
 }
