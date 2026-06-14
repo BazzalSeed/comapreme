@@ -6,6 +6,7 @@ import { getZodiacByYear } from "@/lib/zodiac";
 import { ELEMENT_EMOJI, ELEMENT_COLOR } from "@/lib/elements";
 import { SignHero, type Chip } from "@/components/SignHero";
 import { CREATURES } from "@/components/creatures";
+import { ShareWithFriend } from "@/components/ShareWithFriend";
 import { FigureGallery } from "@/components/sections/FigureGallery";
 import { TraitBars } from "@/components/sections/TraitBars";
 import { LorePanel } from "@/components/sections/LorePanel";
@@ -75,13 +76,16 @@ export default async function SignPage({ params, searchParams }: PageProps) {
         elementAnimal={personal?.elementAnimal}
       />
 
-      <footer className="mx-auto w-full max-w-2xl px-4 pb-16 text-center">
-        <Link href="/" className="btn-primary inline-block">
+      <footer className="mx-auto flex w-full max-w-2xl flex-col items-center gap-6 px-4 pb-16 text-center">
+        <div className="flex flex-col items-center gap-3">
+          <h2 className="font-display text-2xl text-[var(--vermilion-dk)]">
+            Are you compatible with your friends?
+          </h2>
+          <ShareWithFriend slug={slug} year={personal?.year} animal={content.animal} />
+        </div>
+        <Link href="/" className="text-sm font-semibold text-[var(--vermilion-dk)] underline">
           Check another sign →
         </Link>
-        <p className="mt-6 text-xs text-[var(--gold-edge)]">
-          comapreme · one day, see how you stack up against the legends who share your sign.
-        </p>
       </footer>
     </main>
   );

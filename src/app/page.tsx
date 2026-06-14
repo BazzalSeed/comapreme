@@ -18,7 +18,7 @@ export default function Home() {
             textShadow: "0 3px 0 rgba(125,90,10,0.18)",
           }}
         >
-          comapreme
+          compareme
         </h1>
         <p className="mt-3 max-w-md text-lg font-medium text-[#5a4a2a]">
           Pick your birth year, find your Chinese zodiac — and meet the legends who share your sign.

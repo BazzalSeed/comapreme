@@ -1,6 +1,6 @@
-# comapreme — Design System
+# compareme — Design System
 
-The single source of truth for the look, feel, and motion of comapreme. Every screen and
+The single source of truth for the look, feel, and motion of compareme. Every screen and
 every future zodiac sign must follow this. **Playful but authentic** is the north star:
 genuinely correct Chinese iconography, delivered with charm and humor — never generic.
 
