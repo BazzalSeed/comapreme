@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+/* ============================================================
+   comapreme design tokens — see docs/design-system.md
+   ============================================================ */
+:root {
+  --gold: #e6b23c;
+  --gold-edge: #9c6a16;
+  --gold-soft: #c98e22;
+  --belly: #fbe9bf;
+  --vermilion: #d6342b;
+  --vermilion-dk: #b3241c;
+  --jade: #1f9e8c;
+  --ink: #181818;
+  --cream: #fdf6e6;
+  --cream-deep: #ecdcb8;
+
+  --el-wood: #4f9d5d;
+  --el-fire: #e0533b;
+  --el-earth: #c79a4b;
+  --el-metal: #b9b9c2;
+  --el-water: #3a7ca5;
+
+  --background: var(--cream);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-gold: var(--gold);
+  --color-vermilion: var(--vermilion);
+  --color-jade: var(--jade);
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 120%, var(--cream) 0%, #f4ead2 62%, var(--cream-deep) 100%);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: var(--font-body), "Trebuchet MS", system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+/* ============================================================
+   Game banner
+   ============================================================ */
+.banner {
+  display: inline-flex;
+  align-items: stretch;
+  filter: drop-shadow(0 6px 12px rgba(120, 70, 0, 0.35));
+}
+.banner-inner {
+  background: linear-gradient(var(--vermilion), var(--vermilion-dk));
+  border-top: 4px solid var(--gold);
+  border-bottom: 4px solid var(--gold);
+  padding: 8px 34px;
+  text-align: center;
+}
+.banner-sub {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: var(--belly);
+}
+.banner-title {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 900;
+  line-height: 1;
+  color: #ffe9a8;
+  text-shadow: 0 2px 0 #7d1810, 0 0 16px rgba(255, 210, 120, 0.55);
+  letter-spacing: 0.06em;
+}
+.banner-boss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  background: radial-gradient(circle at 40% 35%, #f5d27a, var(--gold-soft) 70%, #a86f16);
+  color: #7d1810;
+  font-size: 26px;
+  border: 4px solid var(--gold);
+  box-shadow: inset 0 0 8px rgba(125, 24, 16, 0.4);
+}
+.banner-boss.left { border-radius: 12px 0 0 12px; }
+.banner-boss.right { border-radius: 0 12px 12px 0; }
+
+/* ============================================================
+   Stat chips
+   ============================================================ */
+.chip {
+  display: inline-block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #7d4a10;
+  background: linear-gradient(#fdf0cf, #f0d99b);
+  border: 2px solid var(--gold-soft);
+  border-radius: 20px;
+  padding: 5px 13px;
+  box-shadow: 0 2px 0 var(--gold-soft);
+}
+
+/* ============================================================
+   Speech bubble (sticker/comic style)
+   ============================================================ */
+.bubble {
+  position: relative;
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  padding: 8px 16px;
+  font-weight: 600;
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: opacity 0.2s ease;
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border: 9px solid transparent;
+  border-top-color: var(--ink);
+}
+
+/* ============================================================
+   Primary button
+   ============================================================ */
+.btn-primary {
+  background: linear-gradient(var(--gold), var(--gold-soft));
+  border: 2px solid var(--gold-edge);
+  border-radius: 24px;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 12px 28px;
+  box-shadow: 0 4px 0 var(--gold-edge);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  text-shadow: 0 1px 1px rgba(125, 60, 0, 0.4);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 5px 0 var(--gold-edge); }
+.btn-primary:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--gold-edge); }
+.btn-primary:disabled { opacity: 0.55; cursor: not-allowed; box-shadow: 0 4px 0 var(--gold-edge); transform: none; }
+
+/* ============================================================
+   Figure cards
+   ============================================================ */
+.figure-card {
+  background: #fffdf6;
+  border: 2px solid var(--gold-soft);
+  border-radius: 14px;
+  box-shadow: 0 4px 0 var(--gold-soft);
+  padding: 16px;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: default;
+}
+.figure-card:hover { transform: translateY(-4px); box-shadow: 0 8px 0 var(--gold-soft); }
+.figure-avatar {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #f5d27a, var(--gold-soft));
+  border: 3px solid var(--gold-edge);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+
+/* ============================================================
+   Stat bars
+   ============================================================ */
+.stat-track {
+  display: inline-flex;
+  gap: 4px;
+}
+.stat-seg {
+  width: 22px;
+  height: 12px;
+  border-radius: 3px;
+  background: #ead9b0;
+  border: 1px solid var(--gold-soft);
+}
+.stat-seg.on { background: linear-gradient(var(--gold), var(--vermilion)); border-color: var(--gold-edge); }
+
+/* ============================================================
+   Scroll reveal
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   Dragon animations
+   ============================================================ */
+.d-float { animation: d-float 3.6s ease-in-out infinite; }
+@keyframes d-float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-12px) rotate(-1.2deg); } }
+.d-whisk { animation: d-sway 3s ease-in-out infinite; transform-origin: 64px 144px; }
+.d-whisk2 { animation: d-sway 3.6s ease-in-out infinite reverse; transform-origin: 66px 158px; }
+@keyframes d-sway { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(6deg); } }
+.d-eyes { animation: d-blink 4.5s infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes d-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
+.d-pearl { animation: d-pulse 2.4s ease-in-out infinite; transform-origin: 52px 120px; }
+@keyframes d-pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.15); opacity: 0.8; } }
+.d-holder { transition: transform 0.18s ease; }
+.d-holder.excited { transform: scale(1.06); }
+.d-holder.jump { animation: d-jump 0.55s ease; }
+@keyframes d-jump { 0% { transform: translateY(0); } 35% { transform: translateY(-46px) scale(1.05, 0.95); } 100% { transform: translateY(0); } }
+.fire-puff { position: absolute; font-size: 2rem; pointer-events: none; z-index: 30; animation: fire-puff 1s ease-out forwards; }
+@keyframes fire-puff { 0% { opacity: 1; transform: translateY(0) scale(0.6); } 100% { opacity: 0; transform: translateY(-90px) scale(1.6); } }
+.creature-pop { animation: creature-pop 0.45s ease both; }
+@keyframes creature-pop { 0% { opacity: 0; transform: scale(0.7) translateY(8px); } 60% { transform: scale(1.05); } 100% { opacity: 1; transform: none; } }
+
+/* ============================================================
+   Reduced motion — calm everything down
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .d-float, .d-whisk, .d-whisk2, .d-eyes, .d-pearl, .d-holder.jump, .fire-puff, .creature-pop {
+    animation: none !important;
+  }
+  .d-holder.excited { transform: none; }
+}
