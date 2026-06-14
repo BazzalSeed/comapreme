@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { getZodiacByYear } from "@/lib/zodiac";
+import { YearField, isValidYear } from "@/components/YearField";
 
 const CURRENT_YEAR = new Date().getFullYear();
-const YEARS = Array.from({ length: CURRENT_YEAR - 1900 + 1 }, (_, i) => CURRENT_YEAR - i);
 
 export function YearInput() {
   const router = useRouter();
@@ -13,10 +13,15 @@ export function YearInput() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const valid = isValidYear(year);
+  const animal = valid ? getZodiacByYear(Number(year)).animal : null;
+
   function go() {
     if (loading) return;
-    if (!year) {
-      setError("Pick your birth year first 🐣");
+    if (!isValidYear(year)) {
+      if (!year) setError("Pick your birth year first 🐣");
+      else if (/^\d{4}$/.test(year) && Number(year) > CURRENT_YEAR) setError("That year hasn't happened yet 🔮");
+      else setError("Enter a 4-digit year from 1900 onward 🐣");
       return;
     }
     setError("");
@@ -33,26 +38,9 @@ export function YearInput() {
       }}
       className="flex flex-col items-center gap-3 w-full"
     >
-      <label className="sr-only" htmlFor="year">Your birth year</label>
-      <div className="relative w-full">
-        <select
-          id="year"
-          value={year}
-          onChange={(e) => {
-            setYear(e.target.value);
-            setError("");
-          }}
-          className="w-full appearance-none rounded-xl border-[3px] border-[var(--ink)] bg-white px-4 py-3 pr-10 text-center text-lg font-semibold text-[var(--ink)] shadow-[3px_3px_0_var(--ink)] outline-none focus:border-[var(--vermilion)]"
-        >
-          <option value="" disabled>Pick your birth year</option>
-          {YEARS.map((y) => (
-            <option key={y} value={y}>{y}</option>
-          ))}
-        </select>
-        <span aria-hidden className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xl text-[var(--gold-edge)]">▾</span>
-      </div>
+      <YearField value={year} onChange={(v) => { setYear(v); setError(""); }} />
       <button type="submit" className="btn-primary w-full text-lg" disabled={loading}>
-        {loading ? "Summoning…" : "Reveal my sign 🐉"}
+        {loading ? "Summoning…" : valid && animal ? `Reveal your ${animal} 🐉` : "Reveal my sign 🐉"}
       </button>
       {error && <p className="text-sm font-semibold text-[var(--vermilion-dk)]">{error}</p>}
     </form>

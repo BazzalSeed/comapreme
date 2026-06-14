@@ -5,9 +5,7 @@ import { useRouter } from "next/navigation";
 import { getZodiacByYear } from "@/lib/zodiac";
 import { CREATURES } from "@/components/creatures";
 import { GameBanner } from "@/components/GameBanner";
-
-const CURRENT_YEAR = new Date().getFullYear();
-const YEARS = Array.from({ length: CURRENT_YEAR - 1900 + 1 }, (_, i) => CURRENT_YEAR - i);
+import { YearField, isValidYear } from "@/components/YearField";
 
 interface FriendEntryProps {
   aSlug: string;
@@ -37,7 +35,7 @@ export function FriendEntry({ aSlug, aAnimal, aEmoji, aYear, aName, aElementAnim
       setError("Enter your name first 🐣");
       return;
     }
-    if (!year) {
+    if (!isValidYear(year)) {
       setError("Pick your birth year 🐣");
       return;
     }
@@ -76,18 +74,7 @@ export function FriendEntry({ aSlug, aAnimal, aEmoji, aYear, aName, aElementAnim
           onChange={(e) => { setName(e.target.value); setError(""); }}
           className="w-full rounded-xl border-[3px] border-[var(--ink)] bg-white px-4 py-2.5 text-center font-semibold text-[var(--ink)] shadow-[3px_3px_0_var(--ink)] outline-none focus:border-[var(--vermilion)]"
         />
-        <div className="relative w-full">
-          <select
-            value={year}
-            onChange={(e) => { setYear(e.target.value); setError(""); }}
-            aria-label="Your birth year"
-            className="w-full appearance-none rounded-xl border-[3px] border-[var(--ink)] bg-white px-4 py-3 pr-10 text-center text-lg font-semibold text-[var(--ink)] shadow-[3px_3px_0_var(--ink)] outline-none focus:border-[var(--vermilion)]"
-          >
-            <option value="" disabled>Pick your birth year</option>
-            {YEARS.map((y) => <option key={y} value={y}>{y}</option>)}
-          </select>
-          <span aria-hidden className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xl text-[var(--gold-edge)]">▾</span>
-        </div>
+        <YearField value={year} onChange={(v) => { setYear(v); setError(""); }} />
         <button type="submit" className="btn-primary w-full text-lg" disabled={loading}>
           {loading ? "Summoning…" : "Reveal our compatibility 💞"}
         </button>
