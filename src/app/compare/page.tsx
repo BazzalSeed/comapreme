@@ -61,6 +61,7 @@ export default async function ComparePage({ searchParams }: PageProps) {
         compat={compat}
         shareUrl={`/compare?${shareParams.toString()}`}
         restartUrl={`/compare?${restart.toString()}`}
+        ownSignUrl={by ? `/sign/${bSign.slug}?year=${by}` : `/sign/${bSign.slug}`}
       />
     );
   }

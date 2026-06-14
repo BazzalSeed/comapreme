@@ -1,9 +1,12 @@
 import Link from "next/link";
 import type { Compatibility, CompatAnimation } from "@/lib/compatibility";
+import { getRelations } from "@/lib/compatibility";
 import { CREATURES } from "@/components/creatures";
+import { SIGNS } from "@/data/registry";
 import { GameBanner } from "@/components/GameBanner";
 import { CompatibilityMeter } from "@/components/CompatibilityMeter";
 import { ShareButton } from "@/components/ShareButton";
+import { Reveal } from "@/components/Reveal";
 
 interface ResultProps {
   aSlug: string;
@@ -15,6 +18,7 @@ interface ResultProps {
   compat: Compatibility;
   shareUrl: string;
   restartUrl: string;
+  ownSignUrl: string;
 }
 
 const STYLE: Record<CompatAnimation, { left: string; right: string; float: string; color: string; mirror?: boolean }> = {
@@ -25,22 +29,53 @@ const STYLE: Record<CompatAnimation, { left: string; right: string; float: strin
   clash: { left: "clash-l", right: "clash-r", float: "💥", color: "var(--vermilion)" },
 };
 
-// fixed positions so server/client render identically (no random)
 const FLOATS = [
   { left: "20%", delay: "0s" }, { left: "38%", delay: "0.5s" }, { left: "50%", delay: "1s" },
   { left: "62%", delay: "0.3s" }, { left: "78%", delay: "0.8s" }, { left: "30%", delay: "1.3s" },
   { left: "70%", delay: "1.6s" },
 ];
 
+const META = Object.fromEntries(SIGNS.map((s) => [s.slug, s])) as Record<string, (typeof SIGNS)[number]>;
+
+function SignChips({ slugs }: { slugs: string[] }) {
+  return (
+    <span className="inline-flex flex-wrap justify-center gap-1.5">
+      {slugs.map((sl) => (
+        <Link
+          key={sl}
+          href={`/sign/${sl}`}
+          className="inline-flex items-center gap-1 rounded-full border-2 border-[var(--gold-soft)] bg-[#fffdf6] px-2.5 py-0.5 text-sm font-semibold text-[var(--ink)] hover:border-[var(--vermilion)]"
+        >
+          <span aria-hidden>{META[sl]?.emoji}</span>
+          {META[sl]?.animal}
+        </Link>
+      ))}
+    </span>
+  );
+}
+
+function DetailCard({ emoji, title, body }: { emoji: string; title: string; body: string }) {
+  return (
+    <div className="h-full rounded-2xl border-2 border-[var(--gold-soft)] bg-[#fffdf6] p-5 text-left shadow-[0_3px_0_var(--gold-soft)]">
+      <h3 className="font-display text-xl text-[var(--vermilion-dk)]">{emoji} {title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-[#5a4a2a]">{body}</p>
+    </div>
+  );
+}
+
 export function CompatibilityResult({
-  aSlug, bSlug, aLabel, bLabel, aEmoji, bEmoji, compat, shareUrl, restartUrl,
+  aSlug, bSlug, aLabel, bLabel, aEmoji, bEmoji, compat, shareUrl, restartUrl, ownSignUrl,
 }: ResultProps) {
   const A = CREATURES[aSlug];
   const B = CREATURES[bSlug];
   const s = STYLE[compat.animation];
+  const relA = getRelations(aSlug);
+  const relB = getRelations(bSlug);
+  const aName = META[aSlug]?.animal ?? aSlug;
+  const bName = META[bSlug]?.animal ?? bSlug;
 
   return (
-    <main className="flex-1 flex flex-col items-center gap-6 px-4 py-10 text-center">
+    <main className="flex-1 flex flex-col items-center gap-7 px-4 py-10 text-center">
       <GameBanner sub="COMPATIBILITY" title={compat.title.toUpperCase()} emblem={compat.emoji} titleSize="clamp(1.5rem, 6vw, 2.8rem)" />
 
       <p className="text-lg font-semibold text-[var(--ink)]">
@@ -68,11 +103,31 @@ export function CompatibilityResult({
       <CompatibilityMeter score={compat.score} color={s.color} />
       <p className="max-w-md text-[#5a4a2a]">{compat.blurb}</p>
 
+      {/* rich detail */}
+      <div className="grid w-full max-w-3xl gap-4 sm:grid-cols-3">
+        <Reveal><DetailCard emoji="👯" title="As friends" body={compat.asFriends} /></Reveal>
+        <Reveal delay={80}><DetailCard emoji="💘" title="As lovers" body={compat.asLovers} /></Reveal>
+        <Reveal delay={160}><DetailCard emoji="⚠️" title="Watch out for" body={compat.watchOut} /></Reveal>
+      </div>
+
+      {/* per-sign matches */}
+      <div className="flex w-full max-w-2xl flex-col gap-4">
+        {[{ name: aName, emoji: aEmoji, rel: relA }, { name: bName, emoji: bEmoji, rel: relB }].map((x) => (
+          <div key={x.name} className="rounded-2xl border-2 border-[var(--gold-soft)] bg-[#fffdf6]/70 p-4">
+            <p className="mb-2 font-display text-lg text-[var(--ink)]">{x.emoji} {x.name}</p>
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[var(--jade)]">Clicks with</p>
+            <SignChips slugs={x.rel.best} />
+            <p className="mb-1 mt-3 text-xs font-semibold uppercase tracking-wide text-[var(--vermilion)]">Clashes with</p>
+            <SignChips slugs={x.rel.avoid} />
+          </div>
+        ))}
+      </div>
+
       <div className="mt-2 flex flex-col items-center gap-3">
         <ShareButton url={shareUrl} text={`${aLabel} & ${bLabel}: ${compat.score}% — ${compat.title}! 💞 comapreme`} label="Share this result 🔗" />
-        <div className="flex gap-4 text-sm font-semibold text-[var(--vermilion-dk)]">
+        <div className="flex flex-wrap justify-center gap-4 text-sm font-semibold text-[var(--vermilion-dk)]">
           <Link href={restartUrl} className="underline">Compare someone else →</Link>
-          <Link href="/" className="underline">Find your own sign →</Link>
+          <Link href={ownSignUrl} className="underline">See your own sign →</Link>
         </div>
       </div>
     </main>

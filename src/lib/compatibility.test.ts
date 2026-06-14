@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getCompatibility } from "./compatibility";
+import { getCompatibility, getRelations } from "./compatibility";
 import { ANIMALS } from "./zodiac";
 
 const slugs = ANIMALS.map((a) => a.toLowerCase());
@@ -73,6 +73,9 @@ describe("getCompatibility — score + symmetry", () => {
         expect(anims.has(c.animation)).toBe(true);
         expect(c.title.length).toBeGreaterThan(0);
         expect(c.blurb.length).toBeGreaterThan(0);
+        expect(c.asFriends.length).toBeGreaterThan(20);
+        expect(c.asLovers.length).toBeGreaterThan(20);
+        expect(c.watchOut.length).toBeGreaterThan(20);
         count++;
       }
     }
@@ -81,5 +84,21 @@ describe("getCompatibility — score + symmetry", () => {
 
   it("throws on unknown signs", () => {
     expect(() => getCompatibility("dragon", "wyvern")).toThrow();
+  });
+});
+
+describe("getRelations", () => {
+  it("lists Dragon's best (secret friend + trine) and clash", () => {
+    const r = getRelations("dragon");
+    expect(r.best.sort()).toEqual(["monkey", "rat", "rooster"]); // trine rat/monkey + secret-friend rooster
+    expect(r.avoid).toEqual(["dog"]);
+  });
+
+  it("every sign has 3 best matches and 1 clash", () => {
+    for (const a of slugs) {
+      const r = getRelations(a);
+      expect(r.best, a).toHaveLength(3);
+      expect(r.avoid, a).toHaveLength(1);
+    }
   });
 });
